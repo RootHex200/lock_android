@@ -1,0 +1,23 @@
+{
+  "device_id": "11111111-1111-4111-8111-111111111111",
+  "credential": {
+    "credential_id": "22222222-2222-4222-8222-222222222222",
+    "algorithm": "EC_secp256r1_SHA256",
+    "issued_at": "2026-07-29T12:00:00+00:00"
+  },
+  "server_signing_public_key": "BASE64_ED25519_PUBLIC_KEY_32_BYTES",
+  "server_signing_public_key_algorithm": "Ed25519",
+  "state": {
+    "enrollment_status": "ACTIVE",
+    "desired_state": "UNLOCKED",
+    "reported_state": "UNLOCKED"
+  },
+  "settings": {
+    "shop_name": "Karim Mobiles",
+    "support_phone": "+8801700000000",
+    "lock_screen_message": "Please contact the shop to restore access.",
+    "reconnect_instructions": "Connect to Wi-Fi and wait one minute."
+  },
+  "poll_interval_seconds": 900,
+  "api_version": "v1"
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- U10/U25: Device Owner admin policies. Deliberately minimal — NO personal
+     content access. force-lock/wipe-data are NOT declared (never wipe/brick,
+     AND-017). LockTask + user-restriction control come from Device Owner APIs. -->
+<device-admin xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-policies>
+        <limit-password />
+        <watch-login />
+        <disable-keyguard-features />
+    </uses-policies>
+</device-admin>

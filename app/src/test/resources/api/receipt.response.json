@@ -1,0 +1,7 @@
+{
+  "receipt_id": 456,
+  "command_status": "CONFIRMED",
+  "reported_state": "LOCKED",
+  "desired_state": "LOCKED",
+  "accepted": true
+}

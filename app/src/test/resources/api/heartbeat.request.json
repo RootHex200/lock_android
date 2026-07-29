@@ -1,0 +1,11 @@
+{
+  "reported_state": "LOCKED",
+  "app_version": "1.0.0",
+  "android_version": "13",
+  "last_sequence": 5,
+  "health": {
+    "battery": 82,
+    "enrollment_ok": true,
+    "lock_task_active": true
+  }
+}

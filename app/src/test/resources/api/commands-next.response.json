@@ -1,0 +1,15 @@
+{
+  "_comment": "GET commands/next returns the RAW signed command bytes as the response BODY (exactly this object, canonical key order) with the detached Ed25519 signature in the X-Command-Signature header. 204 No Content when no command is pending. The device MUST verify over the received bytes, never a re-serialization (KTD-4).",
+  "body": {
+    "id": 123,
+    "device_id": "11111111-1111-4111-8111-111111111111",
+    "sequence": 5,
+    "action": "LOCK",
+    "issued_at": "2026-07-29T12:00:00+00:00",
+    "expires_at": "2026-07-29T13:00:00+00:00"
+  },
+  "headers": {
+    "X-Command-Signature": "BASE64_ED25519_DETACHED_SIGNATURE",
+    "X-Command-Signature-Algorithm": "Ed25519"
+  }
+}
