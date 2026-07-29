@@ -1,3 +1,29 @@
 <resources>
-    <string name="app_name">lock</string>
+    <string name="app_name">Device Lock</string>
+
+    <!-- Status (U11) -->
+    <string name="status_not_enrolled">This device is not yet enrolled.</string>
+    <string name="status_normal">Device active — normal use.</string>
+    <string name="status_locked">Device is locked.</string>
+    <string name="open_diagnostics">Diagnostics</string>
+
+    <!-- Enrollment (U10) -->
+    <string name="enroll_in_progress">Enrolling this device…</string>
+    <string name="enroll_success">Device enrolled successfully.</string>
+    <string name="enroll_failed">Enrollment failed: %1$s</string>
+    <string name="enroll_missing_token">No enrollment token found in provisioning payload.</string>
+
+    <!-- Lock screen (U21) -->
+    <string name="lock_default_message">This device has been locked. Please contact the shop to restore access.</string>
+    <string name="lock_status_label">LOCKED</string>
+    <string name="lock_support_label">Support</string>
+    <string name="lock_emergency_call">Call support</string>
+    <string name="lock_reconnect_label">To reconnect</string>
+
+    <!-- Reboot relock (U23) -->
+    <string name="relock_restoring">Restoring device status…</string>
+
+    <!-- Device admin (U10/U25) -->
+    <string name="device_admin_label">Device Financing Lock</string>
+    <string name="device_admin_description">Manages the financed-device lock policy. Does not access personal content.</string>
 </resources>
