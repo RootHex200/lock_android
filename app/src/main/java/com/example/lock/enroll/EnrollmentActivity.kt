@@ -49,8 +49,12 @@ class EnrollmentActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val result = manager.enroll(token)
             status.text = when (result) {
-                is EnrollmentManager.Result.Success ->
+                is EnrollmentManager.Result.Success -> {
+                    // Start background sync NOW so commands arrive without
+                    // reopening the app (fixes "only polls when app is open").
+                    com.example.lock.sync.SyncScheduler.start(applicationContext)
                     getString(com.example.lock.R.string.enroll_success)
+                }
                 is EnrollmentManager.Result.Failure ->
                     getString(com.example.lock.R.string.enroll_failed, result.reason)
             }

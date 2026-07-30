@@ -5,8 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.core.content.ContextCompat
 import com.example.lock.AppContainer
-import com.example.lock.sync.HeartbeatWorker
-import com.example.lock.sync.SyncWorker
+import com.example.lock.sync.SyncScheduler
 
 /**
  * U12 + U23 / AND-005/010: on BOOT_COMPLETED, reschedule sync/heartbeat, poll
@@ -24,11 +23,9 @@ class BootReceiver : BroadcastReceiver() {
             return
         }
 
-        SyncWorker.schedulePeriodic(context)
-        HeartbeatWorker.schedulePeriodic(context)
-        SyncWorker.pollNow(context)
-
         if (!AppContainer(context).isEnrolled()) return
+
+        SyncScheduler.start(context)
 
         // Start the foreground relock service; it decides whether to re-lock.
         val serviceIntent = Intent(context, RelockForegroundService::class.java)
