@@ -13,6 +13,20 @@
     <string name="enroll_failed">Enrollment failed: %1$s</string>
     <string name="enroll_missing_token">No enrollment token found in provisioning payload.</string>
 
+    <!-- U2: enrollment result copy (non-technical) -->
+    <string name="enroll_result_success_title">Device enrolled ✓</string>
+    <string name="enroll_result_success_msg">This device is managed and active. Hand it to the customer — it works as a normal phone.</string>
+    <string name="enroll_result_already_title">Already enrolled</string>
+    <string name="enroll_result_already_msg">This device is already managed and active.</string>
+    <string name="enroll_result_not_owner_title">Setup didn\'t finish</string>
+    <string name="enroll_result_not_owner_msg">This phone isn\'t fully set up as a managed device. Factory-reset it and scan the QR again — before adding any Google account.</string>
+    <string name="enroll_result_token_title">QR expired or invalid</string>
+    <string name="enroll_result_token_msg">Generate a fresh QR in the panel and scan it again.</string>
+    <string name="enroll_result_network_title">Can\'t reach the server</string>
+    <string name="enroll_result_network_msg">Check the Wi-Fi connection and try again.</string>
+    <string name="enroll_result_failed_title">Enrollment failed</string>
+    <string name="enroll_result_failed_msg">Something went wrong. Generate a new QR and try again.</string>
+
     <!-- Lock screen (U21) -->
     <string name="lock_default_message">This device has been locked. Please contact the shop to restore access.</string>
     <string name="lock_status_label">LOCKED</string>
