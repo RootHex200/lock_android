@@ -2,6 +2,10 @@
 
 `lock_android#1` · **HITL** (requires physical hardware) · Release Gate 1
 
+> **Related:** the one-time provider hosting/config steps that make QR
+> enrollment work live are in [`provisioning-runbook.md`](provisioning-runbook.md)
+> (gated by `php artisan enrollment:check`).
+
 > **Status: template + procedure.** This decision doc defines the supported
 > matrix, the exact QR provisioning payload, the distribution/update method, and
 > the pass/fail checklist. The result columns MUST be filled in against real,
