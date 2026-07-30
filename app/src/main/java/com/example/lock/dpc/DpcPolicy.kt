@@ -1,8 +1,10 @@
 package com.example.lock.dpc
 
+import android.Manifest
 import android.app.admin.DevicePolicyManager
 import android.content.ComponentName
 import android.content.Context
+import android.os.Build
 import android.os.UserManager
 import com.example.lock.DeviceAdminReceiver
 
@@ -40,6 +42,26 @@ class DpcPolicy(private val context: Context) {
         // LockTask packages: this app is the only permitted kiosk package.
         runCatching {
             dpm.setLockTaskPackages(admin, arrayOf(context.packageName))
+        }
+
+        // Package 1: auto-grant our own notification permission so the ongoing
+        // service notice shows. Battery-opt whitelist has no public silent API,
+        // but it isn't required — the persistent FGS is Doze-exempt while
+        // running, and the exact-alarm watchdog gets a temporary allowlist to
+        // restart it when it fires (see Watchdog). MainActivity additionally
+        // offers a one-tap "ignore battery optimizations" prompt as belt-and-braces.
+        grantOwnNotificationPermission()
+    }
+
+    /** Auto-grant POST_NOTIFICATIONS (33+) so the ongoing service notice shows. */
+    private fun grantOwnNotificationPermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return
+        runCatching {
+            dpm.setPermissionGrantState(
+                admin, context.packageName,
+                Manifest.permission.POST_NOTIFICATIONS,
+                DevicePolicyManager.PERMISSION_GRANT_STATE_GRANTED,
+            )
         }
     }
 

@@ -13,6 +13,11 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Package 1: keep the always-on command channel alive + resurrect it -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"
+        android:maxSdkVersion="32" />
 
     <application
         android:name=".LockApp"
@@ -100,6 +105,25 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <!-- Package 1: always-on command channel -->
+        <service
+            android:name=".service.SyncForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="device_owner_command_channel" />
+        </service>
+
+        <!-- Package 1: watchdog that resurrects the service if an OEM kills it -->
+        <receiver
+            android:name=".service.WatchdogReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.lock.WATCHDOG_TICK" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

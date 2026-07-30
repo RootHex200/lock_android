@@ -1,7 +1,12 @@
 package com.example.lock
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.PowerManager
+import android.provider.Settings
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -35,6 +40,25 @@ class MainActivity : AppCompatActivity() {
                 state == DeviceState.LOCKED -> getString(R.string.status_locked)
                 else -> getString(R.string.status_normal)
             }
+            if (container.isEnrolled()) maybePromptBatteryExemption()
+        }
+    }
+
+    /**
+     * Package 1 (belt-and-braces): the persistent service + watchdog keep the
+     * command channel alive without this, but on aggressive OEMs adding the app
+     * to the battery-optimization allowlist makes it bulletproof. There is no
+     * public *silent* API, so offer the one-tap system prompt if not already exempt.
+     */
+    @SuppressLint("BatteryLife")
+    private fun maybePromptBatteryExemption() {
+        val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
+        if (pm.isIgnoringBatteryOptimizations(packageName)) return
+        runCatching {
+            startActivity(
+                Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
+                    .setData(Uri.parse("package:$packageName")),
+            )
         }
     }
 }

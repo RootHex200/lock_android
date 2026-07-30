@@ -23,6 +23,9 @@
     <!-- Reboot relock (U23) -->
     <string name="relock_restoring">Restoring device status…</string>
 
+    <!-- Always-on sync service (Package 1) -->
+    <string name="sync_service_running">Device is managed and active.</string>
+
     <!-- Device admin (U10/U25) -->
     <string name="device_admin_label">Device Financing Lock</string>
     <string name="device_admin_description">Manages the financed-device lock policy. Does not access personal content.</string>
