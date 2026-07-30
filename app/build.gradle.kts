@@ -23,14 +23,21 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // Backend base URL + certificate public-key pin (U10 cert pinning).
-        buildConfigField("String", "SERVER_URL", "\"https://dpc.example.com\"")
-        buildConfigField("String", "CERT_PIN_SHA256", "\"sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=\"")
+        // Override the URL at build time: ./gradlew installDebug -PserverUrl=https://xxxx.ngrok-free.app
+        val serverUrl = (project.findProperty("serverUrl") as String?) ?: "https://dpc.example.com"
+        val certPin = (project.findProperty("certPin") as String?)
+            ?: "sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+        buildConfigField("String", "SERVER_URL", "\"$serverUrl\"")
+        buildConfigField("String", "CERT_PIN_SHA256", "\"$certPin\"")
     }
 
     buildTypes {
         debug {
             // U25: dev escape hatches are ONLY compiled into debug builds.
             buildConfigField("Boolean", "DEV_ESCAPE_ENABLED", "true")
+            // Debug builds skip certificate pinning so you can point at a local
+            // tunnel (ngrok) or dev host without a real pin. Release keeps the pin.
+            buildConfigField("String", "CERT_PIN_SHA256", "\"\"")
         }
         release {
             isMinifyEnabled = false
@@ -94,8 +101,12 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.messaging)
 
-    // libsodium (Ed25519 verify) + JNA
-    implementation(libs.lazysodium.android)
+    // libsodium (Ed25519 verify) + JNA. lazysodium-android needs the JNA *aar*
+    // (bundles the native libs); exclude its transitive jna *jar* so we don't get
+    // duplicate classes at packaging time.
+    implementation(libs.lazysodium.android) {
+        exclude(group = "net.java.dev.jna", module = "jna")
+    }
     implementation(libs.jna) { artifact { type = "aar" } }
 
     // Jetpack Security

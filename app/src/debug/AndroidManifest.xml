@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DEBUG-only additions merged over the main manifest. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:targetApi="24">
+
+        <!-- adb-triggerable force-sync (works during the kiosk lock). -->
+        <receiver
+            android:name=".debug.DebugSyncReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.example.lock.DEBUG_SYNC_NOW" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>
