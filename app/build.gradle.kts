@@ -24,7 +24,7 @@ android {
 
         // Backend base URL + certificate public-key pin (U10 cert pinning).
         // Override the URL at build time: ./gradlew installDebug -PserverUrl=https://xxxx.ngrok-free.app
-        val serverUrl = (project.findProperty("serverUrl") as String?) ?: "https://dpc.example.com"
+        val serverUrl = (project.findProperty("serverUrl") as String?) ?: "https://consensus-attractor-mortality.ngrok-free.dev"
         val certPin = (project.findProperty("certPin") as String?)
             ?: "sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
         buildConfigField("String", "SERVER_URL", "\"$serverUrl\"")
